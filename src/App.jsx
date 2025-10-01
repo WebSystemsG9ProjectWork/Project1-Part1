@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-// import SignIn from "./pages/SignIn";
+import SignIn from "./pages/SignIn";
 
 function App() {
   const [expanded, setExpanded] = useState(false);
@@ -78,7 +78,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/signin" element={<SignIn />} /> */}
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </Router>
     </ToastProvider>
