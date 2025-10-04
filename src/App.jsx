@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -8,64 +8,85 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SignIn from "./pages/SignIn";
+import { Eye } from "lucide-react";
+import './styles/gradient.css';
+import { useTheme } from './context/ThemeContext';
+import { Button } from "react-bootstrap";
+import { Moon, Sun } from "lucide-react";
 
 function App() {
   const [expanded, setExpanded] = useState(false);
+  const [locationPathName, setLocationPathName] = useState(location.pathname);
+  const { theme, toggleTheme } = useTheme();
 
-  const closeNavbar = () => setExpanded(false);
+  const closeNavbar = (locationPathName) =>  {
+    locationPathName != "" ? setLocationPathName(locationPathName) : "";
+    setExpanded(false)
+  };
 
   return (
     <ToastProvider>
       <Router>
         <Navbar 
-          bg="dark" 
-          variant="dark" 
           expand="lg" 
           expanded={expanded}
           onToggle={() => setExpanded(!expanded)}
-          className="sticky-top shadow"
+          className={theme == 'light' ? "navbar-light-color sticky-top shadow" : "sticky-top shadow navbar navbar-expand-lg navbar-dark bg-dark"}
         >
           <Container fluid>
-            <Navbar.Brand as={Link} to="/" onClick={closeNavbar} className="fw-bold">
-              <span className="text-primary">Forge</span>Lens
+            <Navbar.Brand as={Link} to="/" onClick={() => closeNavbar("")} className="fw-bold">
+              <div className="d-flex align-items-center justify-content-center">
+                <Eye className="text-primary" size={20} style={{ filter: 'drop-shadow(0 0 10px rgba(13, 110, 253, 0.5))', marginRight:'5px' }} />
+                <span className="text-primary">Phish</span>Lens
+              </div>
             </Navbar.Brand>
-            
+            <Button
+              variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="p-2 theme-toggle-button"
+              >
+              {theme === "light" ? (
+                <Sun stroke="#000"/>
+              ) : (
+                <Moon fill="white" />
+              )}
+            </Button>
             <Navbar.Toggle 
               aria-controls="navbarNav"
               onClick={() => setExpanded(!expanded)}
             />
-            
             <Navbar.Collapse id="navbarNav">
               <Nav className="ms-auto">
                 <Nav.Link 
                   as={Link} 
                   to="/" 
-                  onClick={closeNavbar}
-                  className="text-light"
+                  onClick={() => closeNavbar("/")}
+                  className={`${locationPathName == '/' ? 'active' : 'text-light'} ${theme == 'light' ? 'dark' : 'light'}`}
                 >
                   Home
                 </Nav.Link>
                 <Nav.Link 
                   as={Link} 
                   to="/about" 
-                  onClick={closeNavbar}
-                  className="text-light"
+                  onClick={() => closeNavbar("/about")}
+                  className={`${locationPathName == '/about' ? 'active' : 'text-light'} ${theme == 'light' ? 'dark' : 'light'}`}
                 >
                   About Us
                 </Nav.Link>
                 <Nav.Link 
                   as={Link} 
                   to="/contact" 
-                  onClick={closeNavbar}
-                  className="text-light"
+                  onClick={() => closeNavbar("/contact")}
+                  className={`${locationPathName == '/contact' ? 'active' : 'text-light'} ${theme == 'light' ? 'dark' : 'light'}`}
                 >
                   Contact
                 </Nav.Link>
                 <Nav.Link 
                   as={Link} 
                   to="/signin" 
-                  onClick={closeNavbar}
-                  className="text-light"
+                  onClick={() => closeNavbar("/signin")}
+                  className={`${locationPathName == '/signin' ? 'active' : 'text-light'} ${theme == 'light' ? 'dark' : 'light'}`}
                 >
                   Sign In
                 </Nav.Link>
@@ -75,7 +96,7 @@ function App() {
         </Navbar>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route index path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signin" element={<SignIn />} />

@@ -1,0 +1,132 @@
+/* Gradient text with cyan to purple gradient */
+.text-primary {
+  background: linear-gradient(135deg, hsl(190, 100%, 50%), hsl(240, 100%, 70%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Gradient button */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(190, 100%, 50%), hsl(240, 100%, 70%)) !important;
+  border: none !important;
+  color: black !important;
+  transition: all 0.3s ease;
+  font-weight: 500!important;
+}
+.active {
+    color: rgba(13, 202, 240, 1) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, hsl(190, 100%, 60%), hsl(240, 100%, 80%)) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 204, 255, 0.4);
+  color: black !important;
+}
+
+.btn-primary svg {
+  color: black !important;
+}
+
+/* Placeholder visibility for dark theme */
+.bg-dark.text-white::placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+.bg-dark.text-white::-webkit-input-placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+.bg-dark.text-white::-moz-placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+/* White close button for Offcanvas */
+.offcanvas-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Floating animations */
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-slow {
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+.resize-none {
+  resize: none;
+}
+.bg-dark {
+  .display-4, .white{
+    color: white;
+  }
+}
+.navbar-light-color {
+    background-color: #e0e0e0;
+    border-bottom: 2px solid white;
+}
+.theme-toggle-button {
+  border-radius: 10px;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+.light {
+  color: white;
+}
+.add-margin-right {
+  margin-right: 7px;
+}
+.dark:not(.active) {
+  color: black!important;
+}
+.light:not(.active) {
+  color: white!important;
+}
+.theme-toggle-button:hover {
+  background-color: #6666ff!important;
+}
+@media (max-width:991px) {
+  .theme-toggle-button {
+    float: right;
+    position: absolute;
+    right: 80px;
+  }
+}
+@media (min-width:991px) {
+  .theme-toggle-button {
+    float: right;
+    position: absolute;
+    right: 295px;
+  }
+}
+.canvas {
+  width: '100%'; 
+  max-width: '500px';
+  &.dark {
+    background-color: #212529;
+  }
+  &.light {
+    background-color: white;
+  }
+}
+.box-shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15)!important;
+}

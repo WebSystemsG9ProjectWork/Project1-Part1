@@ -7,8 +7,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useToast } from '../context/ToastContext';
+import { useTheme } from '../context/ThemeContext'; 
+
 
 function Contact(){
+  const { theme, toggleTheme } = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,23 +43,24 @@ function Contact(){
   };
 
   return (
-    <div className="min-vh-100 py-5">
+    <div className={theme === 'light' ? 'min-vh-100 py-5 bg-light text-dark' : 'min-vh-100 py-5 bg-dark text-white'}>
       <Container className="py-5">
         {/* Header */}
         <div className="text-center mb-5">
-          <h1 className="display-4 fw-bold mb-4">
-            Get in <span className="text-primary">Touch</span>
+          <h1 className="display-4 fw-bold mb-4 text-white">
+            <span className={theme === 'light' ? 'text-dark' : 'text-white'} >Get in</span>
+            <span className="text-primary">Touch</span>
           </h1>
-          <p className="fs-5 text-muted mx-auto" style={{ maxWidth: '900px' }}>
+          <p className={theme === 'light' ? 'fs-5 text-dark mx-auto' : 'fs-5 text-light mx-auto'} style={{ maxWidth: '900px' }}>
             Ready to protect your organization from deepfakes? Contact our team to learn 
-            more about ForgeLens enterprise solutions.
+            more about PhishLens enterprise solutions.
           </p>
         </div>
 
         <Row className="g-4">
           {/* Contact Form */}
           <Col lg={6}>
-            <Card className="shadow-sm bg-dark bg-opacity-10 border position-relative">
+            <Card className="shadow-sm bg-secondary bg-opacity-25 border-secondary position-relative">
               {/* Floating decorative element */}
               <div 
                 className="position-absolute bg-primary bg-opacity-10 rounded-circle floating-element" 
@@ -70,35 +74,34 @@ function Contact(){
               />
               
               <Card.Body className="p-4">
-                <h2 className="fs-3 fw-bold mb-4">Send us a message</h2>
-                
+                <h2 className={theme === 'light' ? 'fs-3 fw-bold mb-4 text-dark' : 'fs-3 fw-bold mb-4 text-white'}>Send us a message</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-4">
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Name</Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Your full name"
-                      className="bg-light border"
+                      className={theme === 'light' ? 'bg-white text-dark border-white' : 'bg-dark text-white border-secondary'}
                     />
                   </Form.Group>
                   
                   <Form.Group className="mb-4">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Email</Form.Label>
                     <Form.Control
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your.email@company.com"
-                      className="bg-light border"
+                      className={theme === 'light' ? 'bg-white text-white border-white' : 'bg-dark text-white border-secondary'}
                     />
                   </Form.Group>
                   
                   <Form.Group className="mb-4">
-                    <Form.Label>Message</Form.Label>
+                    <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Message</Form.Label>
                     <Form.Control
                       as="textarea"
                       name="message"
@@ -106,7 +109,7 @@ function Contact(){
                       onChange={handleInputChange}
                       rows={5}
                       placeholder="Tell us about your deepfake detection needs..."
-                      className="bg-light border"
+                      className={theme === 'light' ? 'bg-white text-dark border-white resize-none' : 'bg-dark text-white border-secondary resize-none'}
                       style={{ minHeight: '128px' }}
                     />
                   </Form.Group>
@@ -117,6 +120,7 @@ function Contact(){
                     size="lg"
                     className="w-100"
                   >
+                    <Send className="me-2" size={20} />
                     Send Message
                   </Button>
                 </Form>
@@ -127,38 +131,38 @@ function Contact(){
           {/* Contact Information */}
           <Col lg={6}>
             <div className="d-flex flex-column gap-4">
-              <Card className="shadow-sm bg-dark bg-opacity-10 border"
+              <Card className="shadow-sm bg-secondary bg-opacity-25 border-secondary"
                     style={{ transition: 'box-shadow 0.3s' }}
-                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)'}
-                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'}>
+                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(13, 110, 253, 0.3)'}
+                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.3)'}>
                 <Card.Body className="p-4">
                   <div className="d-flex align-items-center mb-3">
                     <Mail className="text-primary me-3" size={24} />
-                    <h3 className="fs-5 fw-semibold mb-0">Email Us</h3>
+                    <h3 className={theme === 'light' ? 'fs-5 fw-semibold mb-0 text-dark' : 'fs-5 fw-semibold mb-0 text-white'}>Email Us</h3>
                   </div>
-                  <p className="text-muted mb-1">contact@forgelens.ai</p>
-                  <p className="text-muted mb-0">enterprise@forgelens.ai</p>
+                  <p className={theme === 'light' ? 'text-dark mb-1' : 'text-light mb-1'}>contact@forgelens.ai</p>
+                  <p className={theme === 'light' ? 'text-dark mb-0' : 'text-light mb-0'}>enterprise@forgelens.ai</p>
                 </Card.Body>
               </Card>
 
-              <Card className="shadow-sm bg-dark bg-opacity-10 border"
+              <Card className="shadow-sm bg-secondary bg-opacity-25 border-secondary"
                     style={{ transition: 'box-shadow 0.3s' }}
-                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)'}
-                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'}>
+                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(13, 110, 253, 0.3)'}
+                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.3)'}>
                 <Card.Body className="p-4">
                   <div className="d-flex align-items-center mb-3">
                     <Phone className="text-primary me-3" size={24} />
-                    <h3 className="fs-5 fw-semibold mb-0">Call Us</h3>
+                    <h3 className={theme === 'light' ? 'fs-5 fw-semibold mb-0 text-dark' : 'fs-5 fw-semibold mb-0 text-white'}>Call Us</h3>
                   </div>
-                  <p className="text-muted mb-1">+1 (555) 123-4567</p>
-                  <p className="text-muted small mb-0">Mon - Fri, 9AM - 6PM EST</p>
+                  <p className={theme === 'light' ? 'text-dark mb-1' : 'text-light mb-1'}>+1 (555) 123-4567</p>
+                  <p className={theme === 'light' ? 'text-dark mb-0' : 'text-light mb-0'}>Mon - Fri, 9AM - 6PM EST</p>
                 </Card.Body>
               </Card>
 
-              <Card className="shadow-sm bg-dark bg-opacity-10 border position-relative overflow-hidden"
+              <Card className="shadow-sm bg-secondary bg-opacity-25 border-secondary position-relative overflow-hidden"
                     style={{ transition: 'box-shadow 0.3s' }}
-                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)'}
-                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'}>
+                    onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0.5rem 1rem rgba(13, 110, 253, 0.3)'}
+                    onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.3)'}>
                 {/* Floating element */}
                 <span 
                   className="position-absolute bg-secondary bg-opacity-10 rounded-circle floating-slow" 
@@ -173,36 +177,20 @@ function Contact(){
                 <Card.Body className="p-4 position-relative" style={{ zIndex: 10 }}>
                   <div className="d-flex align-items-center mb-3">
                     <MapPin className="text-primary me-3" size={24} />
-                    <h3 className="fs-5 fw-semibold mb-0">Visit Us</h3>
+                    <h3 className={theme === 'light' ? 'fs-5 fw-semibold mb-0 text-dark' : 'fs-5 fw-semibold mb-0 text-white'}>Visit Us</h3>
                   </div>
-                  <p className="text-muted mb-0">
-                    123 Innovation Drive<br />
-                    San Francisco, CA 94105<br />
+                  <p className={theme === 'light' ? 'text-dark mb-0' : 'text-light mb-0'}>
+                    25800 Carlos Bee Blvd,<br />
+                    Hayward, CA, 94542<br />
                     United States
                   </p>
-                </Card.Body>
-              </Card>
-
-              <Card className="shadow-sm bg-dark bg-opacity-10 border">
-                <Card.Body className="p-4">
-                  <h3 className="fs-5 fw-semibold mb-3">Enterprise Inquiries</h3>
-                  <p className="text-muted mb-4">
-                    For large-scale deployments, custom integrations, and enterprise partnerships, 
-                    our dedicated team is ready to help.
-                  </p>
-                  <Button
-                    variant="outline-primary"
-                    className="border-primary text-primary"
-                  >
-                    Schedule a Demo
-                  </Button>
                 </Card.Body>
               </Card>
             </div>
           </Col>
         </Row>
 
-        {/* CSS for floating animations */}
+        {/* CSS for floating animations and placeholder visibility */}
         <style>
           {`
             .floating-element {
@@ -217,6 +205,22 @@ function Contact(){
               0%, 100% { transform: translateY(0px); }
               50% { transform: translateY(-10px); }
             }
+
+            /* Make placeholders visible on dark background */
+            .bg-dark.text-white::placeholder {
+              color: #adb5bd !important;
+              opacity: 1;
+            }
+            
+            .bg-dark.text-white::-webkit-input-placeholder {
+              color: #adb5bd !important;
+              opacity: 1;
+            }
+            
+            .bg-dark.text-white::-moz-placeholder {
+              color: #adb5bd !important;
+              opacity: 1;
+            }
           `}
         </style>
       </Container>
@@ -224,4 +228,4 @@ function Contact(){
   );
 };
 
-export default Contact;    
+export default Contact;

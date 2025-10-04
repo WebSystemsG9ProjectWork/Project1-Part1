@@ -4,10 +4,12 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { X, LogIn, UserPlus, Eye } from "lucide-react";
+import { LogIn, UserPlus, Eye } from "lucide-react";
 import { useToast } from '../context/ToastContext';
+import { useTheme } from '../context/ThemeContext'; 
 
 function SignIn() {
+  const { theme, toggleTheme } = useTheme();
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -59,43 +61,43 @@ function SignIn() {
   };
 
   return (
-    <div className="min-vh-100 py-5 position-relative overflow-hidden">
+    <div className={theme === 'light' ? 'min-vh-100 py-5 position-relative overflow-hidden bg-white text-dark' : 'min-vh-100 py-5 position-relative overflow-hidden bg-dark text-white'}>
       <Container className="py-5" style={{ maxWidth: '500px' }}>
         {/* Header */}
         <div className="text-center mb-4">
           <div className="d-flex align-items-center justify-content-center mb-3">
             <Eye className="text-primary" size={40} style={{ filter: 'drop-shadow(0 0 10px rgba(13, 110, 253, 0.5))' }} />
           </div>
-          <h1 className="display-5 fw-bold mb-2">
-            Welcome to <span className="text-primary">ForgeLens</span>
+          <h1 className="d-flex align-items-center justify-content-center fw-bold mb-2 text-white">
+            <div className={theme === 'light' ? 'text-dark add-margin-right' : 'text-white add-margin-right'}>Welcome to </div> <span className="text-primary">PhishLens</span>
           </h1>
-          <p className="text-muted">
+          <p className={theme === 'light' ? 'text-dark' : 'text-light'}>
             Sign in to access your deepfake detection dashboard
           </p>
         </div>
 
         {/* Login Form */}
-        <Card className="shadow-lg bg-dark bg-opacity-10 border">
+        <Card className="shadow-lg bg-secondary bg-opacity-25 border-secondary">
           <Card.Body className="p-4">
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3">
-                <Form.Label>Username</Form.Label>
+                <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Username</Form.Label>
                 <Form.Control
                   type="text"
                   value={loginData.username}
                   onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
-                  className="bg-light border"
+                  className={theme === 'light' ? 'bg-white text-dark border-white' : 'bg-dark text-white border-secondary'}
                   placeholder="Enter your username"
                 />
               </Form.Group>
               
               <Form.Group className="mb-4">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Password</Form.Label>
                 <Form.Control
                   type="password"
                   value={loginData.password}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                  className="bg-light border"
+                  className={theme === 'light' ? 'bg-white text-dark border-white' : 'bg-dark text-white border-secondary'}
                   placeholder="Enter your password"
                 />
               </Form.Group>
@@ -112,7 +114,7 @@ function SignIn() {
             </Form>
             
             <div className="mt-4 text-center">
-              <p className="text-muted mb-3">Don't have an account?</p>
+              <p className={theme === 'light' ? 'text-dark mb-3' : 'text-light mb-3'}>Don't have an account?</p>
               <Button
                 onClick={() => setShowRegisterPanel(true)}
                 variant="outline-primary"
@@ -133,55 +135,55 @@ function SignIn() {
         placement="end"
         backdrop={true}
         scroll={false}
-        style={{ width: '100%', maxWidth: '500px' }}
+        className={theme === 'light' ? 'canvas light' : 'canvas dark'}
       >
-        <Offcanvas.Header closeButton className="bg-dark bg-opacity-10 border-bottom">
-          <Offcanvas.Title className="fw-bold">Create Account</Offcanvas.Title>
+        <Offcanvas.Header closeButton className={theme === 'light' ? 'navbar-light-color bg-opacity-25 box-shadow text-dark' : 'canvas dark text-white border-bottom'}>
+          <Offcanvas.Title className={theme === 'light' ? 'fw-bold text-dark' : 'fw-bold text-white'}>Create Account</Offcanvas.Title>
         </Offcanvas.Header>
         
-        <Offcanvas.Body className="bg-dark bg-opacity-10">
+        <Offcanvas.Body className={theme === 'light' ? 'bg-white text-dark' : 'bg-dark text-white'}>
           {/* Register Form */}
           <Form onSubmit={handleRegister} onKeyPress={handleKeyPress}>
             <Form.Group className="mb-3">
-              <Form.Label>Full Name</Form.Label>
+              <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Full Name</Form.Label>
               <Form.Control
                 type="text"
                 value={registerData.name}
                 onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
-                className="bg-light border"
+                className={theme === 'light' ? 'bg-white text-dark border-secondary' : 'bg-dark text-white border-secondary'}
                 placeholder="Your full name"
               />
             </Form.Group>
             
             <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
+              <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Email</Form.Label>
               <Form.Control
                 type="email"
                 value={registerData.email}
                 onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
-                className="bg-light border"
+                className={theme === 'light' ? 'bg-white text-dark border-secondary' : 'bg-dark text-white border-secondary'}
                 placeholder="your.email@company.com"
               />
             </Form.Group>
             
             <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
+              <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Username</Form.Label>
               <Form.Control
                 type="text"
                 value={registerData.username}
                 onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
-                className="bg-light border"
+                className={theme === 'light' ? 'bg-white text-dark border-secondary' : 'bg-dark text-white border-secondary'}
                 placeholder="Choose a username"
               />
             </Form.Group>
             
             <Form.Group className="mb-4">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className={theme === 'light' ? 'text-dark' : 'text-white'}>Password</Form.Label>
               <Form.Control
                 type="password"
                 value={registerData.password}
                 onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-                className="bg-light border"
+                className={theme === 'light' ? 'bg-white text-dark border-secondary' : 'bg-dark text-white border-secondary'}
                 placeholder="Create a secure password"
               />
             </Form.Group>
@@ -197,11 +199,36 @@ function SignIn() {
             </Button>
           </Form>
           
-          <p className="text-muted small mt-4 text-center">
+          <p className="text-light small mt-4 text-center">
             Press Enter or click the button to create your account
           </p>
         </Offcanvas.Body>
       </Offcanvas>
+
+      {/* CSS for placeholder visibility */}
+      <style>
+        {`
+          .bg-dark.text-white::placeholder {
+            color: #adb5bd !important;
+            opacity: 1;
+          }
+          
+          .bg-dark.text-white::-webkit-input-placeholder {
+            color: #adb5bd !important;
+            opacity: 1;
+          }
+          
+          .bg-dark.text-white::-moz-placeholder {
+            color: #adb5bd !important;
+            opacity: 1;
+          }
+
+          /* White close button for Offcanvas */
+          .offcanvas-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+          }
+        `}
+      </style>
     </div>
   );
 }

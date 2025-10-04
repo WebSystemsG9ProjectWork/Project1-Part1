@@ -26,7 +26,6 @@
     transform: rotate(360deg);
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -39,4 +38,30 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.text-primary {
+  background: linear-gradient(135deg, hsl(190, 100%, 50%), hsl(240, 100%, 70%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+}
+
+.theme-toggle-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+
+  /* Use the theme variables */
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+  opacity: 0.8;
 }
