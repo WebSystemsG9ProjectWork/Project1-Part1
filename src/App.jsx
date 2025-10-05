@@ -44,7 +44,7 @@ function App() {
               variant="ghost"
                 size="sm"
                 onClick={toggleTheme}
-                className="p-2 theme-toggle-button"
+                className={expanded ? "p-2 theme-toggle-button set-margin-top" : "p-2 theme-toggle-button"}
               >
               {theme === "light" ? (
                 <Sun stroke="#000"/>
