@@ -19,21 +19,81 @@ function Contact(){
   });
   const toast = useToast();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const emailRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9._-]*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+    const web3FormData = new FormData(event.target);
+
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast.error('Please fill in all fields');
       return;
     }
 
-    // Simulate form submission
-    toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Email is not valid");
+      return;
+    }
 
-    // Reset form
+    Object.entries(formData).forEach(([key, value]) => {
+      web3FormData.set(key, value);
+    });
+
+    web3FormData.append("access_key", "4ee1cb82-7032-44f0-ad75-cbc496f874b1");
+
+    const object = Object.fromEntries(web3FormData);
+    const json = JSON.stringify(object);
+    toast.info('Sending the message.');
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    }).then((res) => res.json());
+
+    if (res.success) {
+      toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      toast.error(data.message)
+    }
     setFormData({ name: "", email: "", message: "" });
   };
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //    if (!formData.name || !formData.email || !formData.message) {
+  //     toast.error('Please fill in all fields');
+  //     return;
+  //   }
+  //   // 
+  //   setFormData(prev => ({
+  //   ...prev,
+  //   "access-key": ""
+  // }));
+  //   // setFormData(formData.append("abc", "123"));
+
+  //   const response = await fetch("https://api.web3forms.com/submit", {
+  //     method: "POST",
+  //     body: formData
+  //   });
+
+  //   const data = await response.json();
+
+  //   if (data.success) {
+  //     setResult("Form Submitted Successfully");
+  //     toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
+  //     event.target.reset();
+  //   } else {
+  //     console.log("Error", data);
+  //     toast.error(data.message)
+  //   }  
+  //   setFormData({ name: "", email: "", message: "" });
+  // };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -66,7 +126,7 @@ function Contact(){
                 className="position-absolute bg-primary bg-opacity-10 rounded-circle floating-element" 
                 style={{ 
                   width: '96px', 
-                  height: '96px', 
+                  height: '96px',
                   top: '-16px', 
                   right: '-16px',
                   filter: 'blur(40px)'

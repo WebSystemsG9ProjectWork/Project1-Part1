@@ -21,27 +21,64 @@ function SignIn() {
     username: "",
     password: ""
   });
-  
+
   const [showRegisterPanel, setShowRegisterPanel] = useState(false);
   const toast = useToast();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!loginData.username || !loginData.password) {
+    if (!loginData.username.trim() || !loginData.password.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
-    toast.success("Login successful!");
+    if(loginData.username == registerData.username && loginData.password == registerData.password) {
+      toast.success("Login successful!");
+    }
+    else {
+      toast.error("Incorrect username or password!");
+    }
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (!registerData.name || !registerData.email || !registerData.username || !registerData.password) {
+    const emailRegex = /^[a-zA-Z0-9]+[a-zA-Z0-9._-]*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+
+    if (!registerData.name.trim() || !registerData.email.trim() || !registerData.username.trim() || !registerData.password.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    // Pre-fill login form and hide panel
+    if (!emailRegex.test(registerData.email)) {
+      toast.error("Email is not valid");
+      return;
+    }
+
+    if (!/[A-Z]/.test(registerData.password)) {
+      toast.error("Password must contain at least one uppercase letter");
+      return;
+    }
+
+    if (!/[a-z]/.test(registerData.password)) {
+      toast.error("Password must contain at least one lowercase letter");
+      return;
+    }
+
+    if (!/\d/.test(registerData.password)) {
+      toast.error("Password must contain at least one number");
+      return;
+    }
+
+    if (!/[^A-Za-z0-9]/.test(registerData.password)) {
+      toast.error("Password must contain at least one special character");
+      return;
+    }
+
+    if (registerData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
+
     setLoginData({
       username: registerData.username,
       password: registerData.password
@@ -50,15 +87,23 @@ function SignIn() {
     setShowRegisterPanel(false);
     toast.success("Account created successfully!");
 
-    // Reset register form
-    setRegisterData({ name: "", email: "", username: "", password: "" });
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleRegister(e);
     }
+    
   };
+
+  const registerUser = (showRegisterPanel) => {
+    setShowRegisterPanel(showRegisterPanel);
+    setRegisterData({ name: "", email: "", username: "", password: "" });
+    setLoginData({
+      username: "",
+      password: ""
+    });
+  }
 
   return (
     <div className={theme === 'light' ? 'min-vh-100 py-5 position-relative overflow-hidden bg-white text-dark' : 'min-vh-100 py-5 position-relative overflow-hidden bg-dark text-white'}>
@@ -116,7 +161,7 @@ function SignIn() {
             <div className="mt-4 text-center">
               <p className={theme === 'light' ? 'text-dark mb-3' : 'text-light mb-3'}>Don't have an account?</p>
               <Button
-                onClick={() => setShowRegisterPanel(true)}
+                onClick={() => registerUser(true)}
                 variant="outline-primary"
                 className="w-100"
               >
@@ -226,6 +271,13 @@ function SignIn() {
           /* White close button for Offcanvas */
           .offcanvas-header .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
+          }
+          .offcanvas-header {
+            &.text-dark {
+              .btn-close {
+                filter: unset
+              }
+            }
           }
         `}
       </style>

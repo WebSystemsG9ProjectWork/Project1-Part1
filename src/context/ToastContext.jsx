@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
+import {AlertCircle, AlertTriangle, CheckSquare, Info} from "lucide-react";
 
 const ToastContext = createContext();
 
@@ -20,7 +21,6 @@ export const ToastProvider = ({ children }) => {
     const newToast = { id, message, type, duration };
     setToasts((prev) => [...prev, newToast]);
 
-    // Auto remove toast after duration
     setTimeout(() => {
       removeToast(id);
     }, duration);
@@ -38,14 +38,14 @@ export const ToastProvider = ({ children }) => {
   const getIcon = (type) => {
     switch (type) {
       case 'success':
-        return '✓';
+        return <CheckSquare size={18} strokeWidth={2} />;
       case 'danger':
-        return '✕';
+        return <AlertCircle size={18} color="#dc3545" strokeWidth={2} />;
       case 'warning':
-        return '⚠';
+        return <AlertTriangle size={18} color="#eab308" strokeWidth={2} />;
       case 'info':
       default:
-        return 'ℹ';
+        return <Info size={18} color="#0d7ef0ff" strokeWidth={2} />;
     }
   };
 
