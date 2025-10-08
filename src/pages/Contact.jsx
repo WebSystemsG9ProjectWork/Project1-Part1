@@ -65,37 +65,6 @@ function Contact(){
     setFormData({ name: "", email: "", message: "" });
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //    if (!formData.name || !formData.email || !formData.message) {
-  //     toast.error('Please fill in all fields');
-  //     return;
-  //   }
-  //   // 
-  //   setFormData(prev => ({
-  //   ...prev,
-  //   "access-key": ""
-  // }));
-  //   // setFormData(formData.append("abc", "123"));
-
-  //   const response = await fetch("https://api.web3forms.com/submit", {
-  //     method: "POST",
-  //     body: formData
-  //   });
-
-  //   const data = await response.json();
-
-  //   if (data.success) {
-  //     setResult("Form Submitted Successfully");
-  //     toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
-  //     event.target.reset();
-  //   } else {
-  //     console.log("Error", data);
-  //     toast.error(data.message)
-  //   }  
-  //   setFormData({ name: "", email: "", message: "" });
-  // };
-
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -157,7 +126,7 @@ function Contact(){
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your.email@company.com"
-                      className={theme === 'light' ? 'bg-white text-white border-white' : 'bg-dark text-white border-secondary'}
+                      className={theme === 'light' ? 'bg-white text-black border-white' : 'bg-dark text-white border-secondary'}
                     />
                   </Form.Group>
                   
