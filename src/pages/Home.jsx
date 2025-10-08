@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import 'react-before-after-slider-component/dist/build.css';
 import { Eye, Brain, Shield } from "lucide-react";
 import { useTheme } from '../context/ThemeContext'; 
+import heroImage from "../assets/hero-deepfake.jpg";
 
 function Home (){
     const { theme, toggleTheme } = useTheme();
@@ -63,6 +64,15 @@ function Home (){
               Learn More
             </Button>
           </div>
+           <div className="d-flex justify-center mt-5">
+              <div className="position-relative">
+                <img 
+                  src={heroImage} 
+                  alt="AI Deepfake Detection Technology" 
+                  className="hero-image img-fluid rounded-4 bg-blue-500 rounded-lg shadow-md float"
+                />
+              </div>
+            </div>
         </Container>
       </section>
 

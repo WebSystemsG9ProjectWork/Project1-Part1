@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
+import MapContainer from "./MapContainer";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -239,6 +240,7 @@ function Contact(){
                     <MapPin className="text-primary me-3" size={24} />
                     <h3 className={theme === 'light' ? 'fs-5 fw-semibold mb-0 text-dark' : 'fs-5 fw-semibold mb-0 text-white'}>Visit Us</h3>
                   </div>
+                   <MapContainer />
                   <p className={theme === 'light' ? 'text-dark mb-0' : 'text-light mb-0'}>
                     25800 Carlos Bee Blvd,<br />
                     Hayward, CA, 94542<br />

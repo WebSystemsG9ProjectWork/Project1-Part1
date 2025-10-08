@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useTheme } from '../context/ThemeContext'; 
+import  missionImage  from '../assets/about_us.png';
 
 function About(){
   const { theme, toggleTheme } = useTheme();
@@ -83,16 +84,23 @@ function About(){
         </section>
 
         {/* Mission Statement */}
-        <section className="mb-5 text-center">
+        <section className="mb-5 text-center mission-section">
           <Card className="bg-secondary bg-opacity-25 border-secondary shadow-sm">
             <Card.Body className="p-5">
               <h2 className={theme === 'light' ? 'fs-3 fw-bold mb-4 text-dark' : 'fs-3 fw-bold mb-4 text-white'}>Our Mission</h2>
-              <p className={theme === 'light' ? 'fs-5 text-muted mx-auto text-dark' : 'fs-5 mx-auto text-white'} style={{ maxWidth: '1000px', lineHeight: '1.8' }}>
-                In an era where synthetic media can be weaponized to spread misinformation, 
-                manipulate markets, and damage reputations, PhishLens stands as a guardian of truth. 
-                We combine cutting-edge computer vision with advanced language models to create 
-                the most sophisticated deepfake image detection system.
-              </p>
+              <div className="d-flex">
+                <p className={theme === 'light' ? 'fs-5 text-muted mx-auto text-dark' : 'fs-5 mx-auto text-white'} style={{ maxWidth: '1000px', lineHeight: '1.8' }}>
+                <div className="mission-text">
+                    In an era where synthetic media can be weaponized to spread misinformation, 
+                    manipulate markets, and damage reputations, PhishLens stands as a guardian of truth. 
+                    We combine cutting-edge computer vision with advanced language models to create 
+                    the most sophisticated deepfake image detection system.
+                  </div>
+                </p>
+                <div class="mission-image">
+                  <img src={missionImage}/>
+                </div>
+              </div>
             </Card.Body>
           </Card>
         </section>

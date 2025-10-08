@@ -7,6 +7,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { LogIn, UserPlus, Eye } from "lucide-react";
 import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext'; 
+import loginImage from "../assets/Login.png"
 
 function SignIn() {
   const { theme, toggleTheme } = useTheme();
@@ -109,9 +110,10 @@ function SignIn() {
     <div className={theme === 'light' ? 'min-vh-100 py-5 position-relative overflow-hidden bg-white text-dark' : 'min-vh-100 py-5 position-relative overflow-hidden bg-dark text-white'}>
       <Container className="py-5" style={{ maxWidth: '500px' }}>
         {/* Header */}
+        
         <div className="text-center mb-4">
           <div className="d-flex align-items-center justify-content-center mb-3">
-            <Eye className="text-primary" size={40} style={{ filter: 'drop-shadow(0 0 10px rgba(13, 110, 253, 0.5))' }} />
+            <img src={loginImage} className="login-image"></img>
           </div>
           <h1 className="d-flex align-items-center justify-content-center fw-bold mb-2 text-white">
             <div className={theme === 'light' ? 'text-dark add-margin-right' : 'text-white add-margin-right'}>Welcome to </div> <span className="text-primary">PhishLens</span>
