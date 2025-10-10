@@ -106,11 +106,16 @@ function SignIn() {
     });
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <div className={theme === 'light' ? 'min-vh-100 py-5 position-relative overflow-hidden bg-white text-dark' : 'min-vh-100 py-5 position-relative overflow-hidden bg-dark text-white'}>
-      <Container className="py-5" style={{ maxWidth: '500px' }}>
-        {/* Header */}
-        
+    <div className={theme === 'light' ? 'min-vh-100 py-5 position-relative overflow-hidden bg-white text-dark' : 'min-vh-100 py-5 position-relative overflow-hidden dark-bg text-white'}>
+      <Container className="py-5" style={{ maxWidth: '500px' }}>        
         <div className="text-center mb-4">
           <div className="d-flex align-items-center justify-content-center mb-3">
             <img src={loginImage} className="login-image"></img>
@@ -251,38 +256,10 @@ function SignIn() {
           </p>
         </Offcanvas.Body>
       </Offcanvas>
-
-      {/* CSS for placeholder visibility */}
-      <style>
-        {`
-          .bg-dark.text-white::placeholder {
-            color: #adb5bd !important;
-            opacity: 1;
-          }
-          
-          .bg-dark.text-white::-webkit-input-placeholder {
-            color: #adb5bd !important;
-            opacity: 1;
-          }
-          
-          .bg-dark.text-white::-moz-placeholder {
-            color: #adb5bd !important;
-            opacity: 1;
-          }
-
-          /* White close button for Offcanvas */
-          .offcanvas-header .btn-close {
-            filter: invert(1) grayscale(100%) brightness(200%);
-          }
-          .offcanvas-header {
-            &.text-dark {
-              .btn-close {
-                filter: unset
-              }
-            }
-          }
-        `}
-      </style>
+      <footer className="footer">
+          <div className="footer-left">&copy;2025 PhishLens</div>
+          <div className="scroll-top btn-primary" id="scrollTopBtn" onClick={scrollToTop}>↑ Top</div>
+      </footer>
     </div>
   );
 }

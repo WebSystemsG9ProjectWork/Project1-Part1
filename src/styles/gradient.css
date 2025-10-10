@@ -1,4 +1,24 @@
 /* Gradient text with cyan to purple gradient */
+:root {
+    --light-bg: #ffffff;
+    --light-text: #000000;
+    --dark-bg: #1a1a1a;
+    --dark-text: #ffffff;
+    --primary-color: #0d6efd;
+    --text-light: #fff;
+    --bg-light: #ffffff;
+      --bg-dark: #1a1a1a;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh;
+}
+
 .text-primary {
   background: linear-gradient(135deg, hsl(190, 100%, 50%), hsl(240, 100%, 70%));
   -webkit-background-clip: text;
@@ -81,16 +101,6 @@
     background-color: #e0e0e0;
     border-bottom: 2px solid white;
 }
-.theme-toggle-button {
-  margin-top: 0 !important;
-  align-self: center !important;
-  position: relative;
-  top: 0;
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-}
 .light {
   color: white;
 }
@@ -102,27 +112,6 @@
 }
 .light:not(.active) {
   color: white!important;
-}
-.theme-toggle-button:hover {
-  background-color: #6666ff!important;
-}
-@media (max-width:991px) {
-  .theme-toggle-button {
-    position: fixed;
-    right: 80px;
-    top: 7px;
-    &.set-margin-top {
-      position: fixed;
-    }
-  }
-}
-@media (min-width:991px) {
-  .theme-toggle-button {
-    float: right;
-    position: absolute;
-    right: 295px;
-    top: 7px;
-  }
 }
 .canvas {
   width: '100%'; 
@@ -146,16 +135,7 @@
 }
 
 
-.hero-image {
-  width: 60%;
-  height: 60%;
-  box-shadow: 
-    0 0 20px rgba(0, 212, 255, 0.6),
-    0 0 40px rgba(0, 128, 255, 0.5),
-    0 0 60px rgba(0, 64, 255, 0.3),
-    inset 0 0 20px rgba(0, 150, 255, 0.1);
-  animation: pulse-glow 2s ease-in-out infinite, float-updown 3s ease-in-out infinite;
-}
+
 
 @keyframes pulse-glow {
   0%, 100% {
@@ -261,7 +241,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  animation: pulse-glow 2s ease-in-out infinite, float-updown 3s ease-in-out infinite;
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 @keyframes pulse-glow {
   0%, 100% {
@@ -288,3 +268,197 @@
     transform: translateY(-20px);
   }
 }
+@media (max-width:770px) {
+  .mission-image img{
+      width: 180px;
+  }
+}
+.navbar {
+    background-color: var(--bg-light);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.dark-theme .navbar {
+    background-color: var(--bg-dark)!important;
+    border-bottom: 1px solid #333;
+}
+
+/* Brand Styling */
+.navbar-brand {
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-brand-icon {
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 10px rgba(13, 110, 253, 0.5));
+    font-size: 20px;
+}
+
+.navbar-brand-text {
+    color: var(--primary-color);
+}
+
+.navbar-brand-text-light {
+    color: var(--text-dark);
+}
+
+.dark-theme .navbar {
+    background-color: var(--bg-dark);
+    border-bottom: 1px solid #333;
+}
+
+.navbar-brand-icon {
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 10px rgba(13, 110, 253, 0.5));
+    font-size: 20px;
+}
+
+.navbar-brand-text {
+    color: var(--primary-color);
+}
+
+.navbar-brand-text-light {
+    color: var(--text-dark);
+}
+
+.set-margin-top {
+    margin-top: 0.5rem;
+}
+
+/* Navigation Links */
+.navbar-nav .nav-link {
+    color: var(--text-light) !important;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.dark-theme .navbar-nav .nav-link {
+    color: var(--text-light) !important;
+}
+
+.navbar-nav .nav-link.active {
+    color: black !important;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.25rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.light-theme .navbar-nav .nav-link {
+    color: var(--text-dark) !important;
+}
+
+/* Dark theme with light text */
+.dark-navbar .navbar-nav .nav-link {
+    color: var(--text-light) !important;
+}
+
+/* Navbar Toggle Button */
+.dark-theme .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.navbar {
+    position: fixed!important;
+    width: 100%;
+    z-index: 10!important;
+    .navbar-toggler {
+      border: none!important;
+    }
+}
+/* Override Bootstrap's default grey border */
+.navbar-light .navbar-toggler,
+.navbar-toggler {
+  border: 2px solid transparent !important;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Highlight when open or focused */
+.navbar-light .navbar-toggler:focus,
+.navbar-light .navbar-toggler:active,
+.navbar-light .navbar-toggler[aria-expanded="true"] {
+  border-color: #0d6efd !important; /* Bootstrap primary blue */
+  background-color: rgba(13, 110, 253, 0.1);
+  outline: none;
+  box-shadow: none;
+}
+
+/* Optional hover highlight */
+.navbar-light .navbar-toggler:hover {
+  border-color: #0d6efd !important;
+}
+.dark-theme {
+  .navbar-brand-text-light {
+    color: #fff;
+  }
+}
+.dark-bg{
+  background-color: black!important;
+}
+.logo {
+  width: 35px;
+  height: 35px;
+}
+.bg-dark.text-white::placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+.bg-dark.text-white::-webkit-input-placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+.bg-dark.text-white::-moz-placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+/* White close button for Offcanvas */
+.offcanvas-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+.offcanvas-header {
+  &.text-dark {
+    .btn-close {
+      filter: unset
+    }
+  }
+}
+.light-theme {
+  .footer-left {
+    color: black;
+  }
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.scroll-top {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
+}
+
+.scroll-top:hover {
+  transform: scale(1.05);
+}
+        
