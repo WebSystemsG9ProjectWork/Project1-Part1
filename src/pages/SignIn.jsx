@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { LogIn, UserPlus, Eye } from "lucide-react";
+import { LogIn, UserPlus, Eye, LogOut } from "lucide-react";
 import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext'; 
 import loginImage from "../assets/Login.png"
@@ -15,6 +15,7 @@ function SignIn() {
     username: "",
     password: ""
   });
+  const [showLogout, setShowLogoutBtn] = useState(false);
   
   const [registerData, setRegisterData] = useState({
     name: "",
@@ -26,6 +27,11 @@ function SignIn() {
   const [showRegisterPanel, setShowRegisterPanel] = useState(false);
   const toast = useToast();
 
+  const signOutUser = () => {
+    setShowLogoutBtn(false);
+    toast.info("Logout successful!");
+  }
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (!loginData.username.trim() || !loginData.password.trim()) {
@@ -34,8 +40,10 @@ function SignIn() {
     }
     if(loginData.username == registerData.username && loginData.password == registerData.password) {
       toast.success("Login successful!");
+      setShowLogoutBtn(true);
     }
     else {
+      setShowLogoutBtn(false);
       toast.error("Incorrect username or password!");
     }
   };
@@ -104,6 +112,7 @@ function SignIn() {
       username: "",
       password: ""
     });
+    setShowLogoutBtn(false);
   }
 
   const scrollToTop = () => {
@@ -153,18 +162,14 @@ function SignIn() {
                   placeholder="Enter your password"
                 />
               </Form.Group>
-              
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="w-100"
-              >
-                <LogIn className="me-2" size={20} />
-                Sign In
-              </Button>
+              {!showLogout &&
+              <Button type="submit" variant="primary" size="lg" className="w-100">
+               <LogIn className="me-2" size={20} />Sign In
+              </Button>}
             </Form>
-            
+            {showLogout && <Button onClick={signOutUser} variant="primary" size="lg" className="w-100">
+               <LogOut className="me-2" size={20}  />Sign Out
+              </Button> }
             <div className="mt-4 text-center">
               <p className={theme === 'light' ? 'text-dark mb-3' : 'text-light mb-3'}>Don't have an account?</p>
               <Button
