@@ -475,7 +475,7 @@ body.dark-theme {
     border-bottom: 2px solid white;
 }
 .theme-toggle-button {
-  margin-top: 0 !important;
+  margin-top: 4px !important;
   align-self: center !important;
   position: relative;
   top: 0;
@@ -1337,7 +1337,7 @@ body.dark-theme .map-placeholder {
 }
 
 .theme-toggle-button {
-  padding: 8px 20px;
+  padding: 7px 20px;
   cursor: pointer;
   border: 2px solid #443d3d;
   border-radius: 5px;
