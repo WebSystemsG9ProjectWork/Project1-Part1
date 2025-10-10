@@ -54,7 +54,9 @@ export default function Navbar() {
       <div className="container-fluid">
         {/* Brand */}
         <a href="/Home.html" className="navbar-brand" id="navbarBrand">
-          <img src="./logo.png" className="logo"/> 
+          <div className="logo-wrapper">
+            <img src="./logo.png" className="logo"/> 
+          </div>
           <span className="navbar-brand-text">Phish</span>
           <span className="navbar-brand-text-light">Lens</span>
         </a>
